@@ -8,5 +8,12 @@
     <artifactId>my_projects_web</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+<dependencies>
+    <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-spring-boot-starter</artifactId>
+        <version>1.9.6</version>
+    </dependency>
+</dependencies>
 
 </project>

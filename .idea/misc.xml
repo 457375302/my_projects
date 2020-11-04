@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/my_projects_basic/pom.xml" />
         <option value="$PROJECT_DIR$/my_projects_basic/my_projects_common/pom.xml" />
         <option value="$PROJECT_DIR$/my_projects_basic/my_projects_entity/pom.xml" />
+        <option value="$PROJECT_DIR$/my_projects_api/my_projects_background_api/pom.xml" />
+        <option value="$PROJECT_DIR$/my_projects_service/my_project_background_service/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="my_projects_service" />
+        <module name="my_projects_web" />
+        <module name="my_projects_mapper" />
+        <module name="my_projects_api" />
+        <module name="my_projects_basic" />
+        <module name="my_projects_entity" />
+        <module name="my_projects_common" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

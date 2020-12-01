@@ -1,5 +1,9 @@
 server:
-  port: 8060
+  port: 8020
+  servlet:
+    context-path: /background-api
+    session:
+      timeout: 30m  #30分钟；h-时；m-分；s-秒；不写毫秒
 
 spring:
   profiles:

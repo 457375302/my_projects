@@ -1,12 +1,58 @@
 dubbo:
   application:
-    name: background
+    name: background-api
   registry:
     protocol: zookeeper
-    address: 192.168.43.130:2181
+    address: 47.113.123.188:2181
   consumer:
     timeout: 5000
 
 spring:
   thymeleaf:
     cache: false
+  redis:
+    # 连接超时时间（毫秒）
+    timeout: 60000ms
+    host: 47.113.123.188
+    port: 6379
+    password: jjc970514
+    lettuce:
+      # 连接池的设置
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 10
+        # 连接池中的最大空闲连接
+        max-idle: 50
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 100
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+  rabbitmq:
+    addresses: 47.113.123.188
+    port: 5672
+    username: jjc
+    password: jjc970514
+    connection-timeout: 60000
+    # 配置消息确认模式
+    publisher-confirm-type: correlated
+    # 配置消息确认return
+    publisher-returns: true
+    template:
+      # 消息发送后，异步等待响应
+      # 设置为 true 后，消费者在消息没有被路由到合适队列情况下会被return监听，而不会自动删除
+      mandatory: true
+    # 消息确认模式：手动
+    listener:
+      simple:
+        acknowledge-mode: manual
+      direct:
+        acknowledge-mode: manual
+fdfs:
+  so-timeout: 1500
+  connect-timeout: 600
+  pool:
+    jmx-enabled: false
+  thumb-image:
+    width: 100
+    height: 100
+  tracker-list: 47.113.123.188:22122

@@ -1,0 +1,12 @@
+dubbo:
+  application:
+    name: background
+  registry:
+    protocol: zookeeper
+    address: 192.168.43.130:2181
+  consumer:
+    timeout: 5000
+
+spring:
+  thymeleaf:
+    cache: false

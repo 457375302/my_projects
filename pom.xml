@@ -19,7 +19,12 @@
     <properties>
     <java.version>1.8</java.version>
     <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-boot-starter -->
-    <swagger.version>1.9.6</swagger.version>
+         <swagger.version>1.9.6</swagger.version>
+
+    <!-- 1.7.21 -> 1.7.25 follow dubbo -->
+        <slf4j.version>1.7.25</slf4j.version>
+        <!-- 2.5 -> 2.10.0 -->
+        <log4j2.version>2.10.0</log4j2.version>
     </properties>
 
     <dependencyManagement>
@@ -30,6 +35,39 @@
         <artifactId>knife4j-spring-boot-starter</artifactId>
         <version>${swagger.version}</version>
     </dependency>
+
+<!--log4j2-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${log4j2.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     </dependencyManagement>
 

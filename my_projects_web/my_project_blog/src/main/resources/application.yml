@@ -1,0 +1,10 @@
+server:
+  port: 8021
+  servlet:
+    context-path: /blog-api
+    session:
+      timeout: 30m  #30分钟；h-时；m-分；s-秒；不写毫秒
+
+spring:
+  profiles:
+    active: dev

@@ -10,12 +10,14 @@
         <module name="my_projects_service" />
         <module name="my_project_background_service" />
         <module name="my_projects_web" />
+        <module name="my_project_blog_service" />
         <module name="my_projects_entity" />
         <module name="my_project_background" />
         <module name="my_projects_util" />
         <module name="my_projects_basic" />
         <module name="my_projects_background_api" />
         <module name="my_projects_mapper" />
+        <module name="my_project_blog" />
         <module name="my_projects_api" />
         <module name="my_projects_common" />
       </profile>
@@ -25,6 +27,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="my_project_background" options="-parameters" />
       <module name="my_project_background_service" options="-parameters" />
+      <module name="my_project_blog" options="-parameters" />
+      <module name="my_project_blog_service" options="-parameters" />
     </option>
   </component>
 </project>

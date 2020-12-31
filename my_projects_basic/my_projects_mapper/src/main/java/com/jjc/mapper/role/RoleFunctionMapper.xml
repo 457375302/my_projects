@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jjc.mapper.role.RoleFunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.jjc.entity.role.RoleFunction" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="model_grade" property="modelGrade" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="function_id" property="functionId" jdbcType="BIGINT" />
+    <result column="model_no" property="modelNo" jdbcType="VARCHAR" />
+    <result column="model_ch_name" property="modelChName" jdbcType="VARCHAR" />
+    <result column="model_en_name" property="modelEnName" jdbcType="VARCHAR" />
+    <result column="model_url" property="modelUrl" jdbcType="VARCHAR" />
+    <result column="model_sort" property="modelSort" jdbcType="INTEGER" />
+    <result column="role_en_name" property="roleEnName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, role_id, model_grade, parent_id, function_id, model_no, model_ch_name, model_en_name, 
+    model_url, model_sort, role_en_name, remark, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jjc.entity.role.example.RoleFunctionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project_role_function
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pageStart!=null and pageStart gt -1" >
+       limit ${pageStart},${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from project_role_function
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from project_role_function
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jjc.entity.role.example.RoleFunctionExample" >
+    delete from project_role_function
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jjc.entity.role.RoleFunction" >
+    insert into project_role_function (id, role_id, model_grade, 
+      parent_id, function_id, model_no, 
+      model_ch_name, model_en_name, model_url, 
+      model_sort, role_en_name, remark, 
+      create_by, create_time, update_by, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{modelGrade,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=BIGINT}, #{functionId,jdbcType=BIGINT}, #{modelNo,jdbcType=VARCHAR}, 
+      #{modelChName,jdbcType=VARCHAR}, #{modelEnName,jdbcType=VARCHAR}, #{modelUrl,jdbcType=VARCHAR}, 
+      #{modelSort,jdbcType=INTEGER}, #{roleEnName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jjc.entity.role.RoleFunction" >
+    insert into project_role_function
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="modelGrade != null" >
+        model_grade,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="functionId != null" >
+        function_id,
+      </if>
+      <if test="modelNo != null" >
+        model_no,
+      </if>
+      <if test="modelChName != null" >
+        model_ch_name,
+      </if>
+      <if test="modelEnName != null" >
+        model_en_name,
+      </if>
+      <if test="modelUrl != null" >
+        model_url,
+      </if>
+      <if test="modelSort != null" >
+        model_sort,
+      </if>
+      <if test="roleEnName != null" >
+        role_en_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="modelGrade != null" >
+        #{modelGrade,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="functionId != null" >
+        #{functionId,jdbcType=BIGINT},
+      </if>
+      <if test="modelNo != null" >
+        #{modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modelChName != null" >
+        #{modelChName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelEnName != null" >
+        #{modelEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelUrl != null" >
+        #{modelUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="modelSort != null" >
+        #{modelSort,jdbcType=INTEGER},
+      </if>
+      <if test="roleEnName != null" >
+        #{roleEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jjc.entity.role.example.RoleFunctionExample" resultType="java.lang.Integer" >
+    select count(*) from project_role_function
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project_role_function
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modelGrade != null" >
+        model_grade = #{record.modelGrade,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.functionId != null" >
+        function_id = #{record.functionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modelNo != null" >
+        model_no = #{record.modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelChName != null" >
+        model_ch_name = #{record.modelChName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelEnName != null" >
+        model_en_name = #{record.modelEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelUrl != null" >
+        model_url = #{record.modelUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelSort != null" >
+        model_sort = #{record.modelSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleEnName != null" >
+        role_en_name = #{record.roleEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_role_function
+    set id = #{record.id,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=BIGINT},
+      model_grade = #{record.modelGrade,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      function_id = #{record.functionId,jdbcType=BIGINT},
+      model_no = #{record.modelNo,jdbcType=VARCHAR},
+      model_ch_name = #{record.modelChName,jdbcType=VARCHAR},
+      model_en_name = #{record.modelEnName,jdbcType=VARCHAR},
+      model_url = #{record.modelUrl,jdbcType=VARCHAR},
+      model_sort = #{record.modelSort,jdbcType=INTEGER},
+      role_en_name = #{record.roleEnName,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jjc.entity.role.RoleFunction" >
+    update project_role_function
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="modelGrade != null" >
+        model_grade = #{modelGrade,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="functionId != null" >
+        function_id = #{functionId,jdbcType=BIGINT},
+      </if>
+      <if test="modelNo != null" >
+        model_no = #{modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modelChName != null" >
+        model_ch_name = #{modelChName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelEnName != null" >
+        model_en_name = #{modelEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelUrl != null" >
+        model_url = #{modelUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="modelSort != null" >
+        model_sort = #{modelSort,jdbcType=INTEGER},
+      </if>
+      <if test="roleEnName != null" >
+        role_en_name = #{roleEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jjc.entity.role.RoleFunction" >
+    update project_role_function
+    set role_id = #{roleId,jdbcType=BIGINT},
+      model_grade = #{modelGrade,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      function_id = #{functionId,jdbcType=BIGINT},
+      model_no = #{modelNo,jdbcType=VARCHAR},
+      model_ch_name = #{modelChName,jdbcType=VARCHAR},
+      model_en_name = #{modelEnName,jdbcType=VARCHAR},
+      model_url = #{modelUrl,jdbcType=VARCHAR},
+      model_sort = #{modelSort,jdbcType=INTEGER},
+      role_en_name = #{roleEnName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

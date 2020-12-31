@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jjc.mapper.user.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jjc.entity.user.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_number" property="userNumber" jdbcType="BIGINT" />
+    <result column="user_password" property="userPassword" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_pay_password" property="userPayPassword" jdbcType="BIGINT" />
+    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="would_store" property="wouldStore" jdbcType="INTEGER" />
+    <result column="user_level" property="userLevel" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="would_real" property="wouldReal" jdbcType="INTEGER" />
+    <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+    <result column="head_url" property="headUrl" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+    <result column="user_qq" property="userQq" jdbcType="VARCHAR" />
+    <result column="user_mail" property="userMail" jdbcType="VARCHAR" />
+    <result column="user_wx" property="userWx" jdbcType="VARCHAR" />
+    <result column="expand1" property="expand1" jdbcType="VARCHAR" />
+    <result column="expand2" property="expand2" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_number, user_password, user_name, user_pay_password, user_type, nick_name, 
+    union_id, open_id, phone, would_store, user_level, status, would_real, user_real_name, 
+    head_url, province_id, city_id, area_id, user_sex, user_qq, user_mail, user_wx, expand1, 
+    expand2, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jjc.entity.user.example.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pageStart!=null and pageStart gt -1" >
+       limit ${pageStart},${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from project_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from project_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jjc.entity.user.example.UserExample" >
+    delete from project_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jjc.entity.user.User" >
+    insert into project_user (id, user_number, user_password, 
+      user_name, user_pay_password, user_type, 
+      nick_name, union_id, open_id, 
+      phone, would_store, user_level, 
+      status, would_real, user_real_name, 
+      head_url, province_id, city_id, 
+      area_id, user_sex, user_qq, 
+      user_mail, user_wx, expand1, 
+      expand2, create_by, create_time, 
+      update_by, update_time)
+    values (#{id,jdbcType=BIGINT}, #{userNumber,jdbcType=BIGINT}, #{userPassword,jdbcType=BIGINT}, 
+      #{userName,jdbcType=VARCHAR}, #{userPayPassword,jdbcType=BIGINT}, #{userType,jdbcType=INTEGER}, 
+      #{nickName,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{wouldStore,jdbcType=INTEGER}, #{userLevel,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{wouldReal,jdbcType=INTEGER}, #{userRealName,jdbcType=VARCHAR}, 
+      #{headUrl,jdbcType=VARCHAR}, #{provinceId,jdbcType=BIGINT}, #{cityId,jdbcType=BIGINT}, 
+      #{areaId,jdbcType=BIGINT}, #{userSex,jdbcType=VARCHAR}, #{userQq,jdbcType=VARCHAR}, 
+      #{userMail,jdbcType=VARCHAR}, #{userWx,jdbcType=VARCHAR}, #{expand1,jdbcType=VARCHAR}, 
+      #{expand2,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jjc.entity.user.User" >
+    insert into project_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userNumber != null" >
+        user_number,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPayPassword != null" >
+        user_pay_password,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="unionId != null" >
+        union_id,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="wouldStore != null" >
+        would_store,
+      </if>
+      <if test="userLevel != null" >
+        user_level,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="wouldReal != null" >
+        would_real,
+      </if>
+      <if test="userRealName != null" >
+        user_real_name,
+      </if>
+      <if test="headUrl != null" >
+        head_url,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userQq != null" >
+        user_qq,
+      </if>
+      <if test="userMail != null" >
+        user_mail,
+      </if>
+      <if test="userWx != null" >
+        user_wx,
+      </if>
+      <if test="expand1 != null" >
+        expand1,
+      </if>
+      <if test="expand2 != null" >
+        expand2,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userNumber != null" >
+        #{userNumber,jdbcType=BIGINT},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPayPassword != null" >
+        #{userPayPassword,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wouldStore != null" >
+        #{wouldStore,jdbcType=INTEGER},
+      </if>
+      <if test="userLevel != null" >
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="wouldReal != null" >
+        #{wouldReal,jdbcType=INTEGER},
+      </if>
+      <if test="userRealName != null" >
+        #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null" >
+        #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userQq != null" >
+        #{userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userWx != null" >
+        #{userWx,jdbcType=VARCHAR},
+      </if>
+      <if test="expand1 != null" >
+        #{expand1,jdbcType=VARCHAR},
+      </if>
+      <if test="expand2 != null" >
+        #{expand2,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jjc.entity.user.example.UserExample" resultType="java.lang.Integer" >
+    select count(*) from project_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userNumber != null" >
+        user_number = #{record.userNumber,jdbcType=BIGINT},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPayPassword != null" >
+        user_pay_password = #{record.userPayPassword,jdbcType=BIGINT},
+      </if>
+      <if test="record.userType != null" >
+        user_type = #{record.userType,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionId != null" >
+        union_id = #{record.unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null" >
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wouldStore != null" >
+        would_store = #{record.wouldStore,jdbcType=INTEGER},
+      </if>
+      <if test="record.userLevel != null" >
+        user_level = #{record.userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.wouldReal != null" >
+        would_real = #{record.wouldReal,jdbcType=INTEGER},
+      </if>
+      <if test="record.userRealName != null" >
+        user_real_name = #{record.userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headUrl != null" >
+        head_url = #{record.headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.areaId != null" >
+        area_id = #{record.areaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userSex != null" >
+        user_sex = #{record.userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userQq != null" >
+        user_qq = #{record.userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMail != null" >
+        user_mail = #{record.userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userWx != null" >
+        user_wx = #{record.userWx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expand1 != null" >
+        expand1 = #{record.expand1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expand2 != null" >
+        expand2 = #{record.expand2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_user
+    set id = #{record.id,jdbcType=BIGINT},
+      user_number = #{record.userNumber,jdbcType=BIGINT},
+      user_password = #{record.userPassword,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_pay_password = #{record.userPayPassword,jdbcType=BIGINT},
+      user_type = #{record.userType,jdbcType=INTEGER},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      union_id = #{record.unionId,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      would_store = #{record.wouldStore,jdbcType=INTEGER},
+      user_level = #{record.userLevel,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      would_real = #{record.wouldReal,jdbcType=INTEGER},
+      user_real_name = #{record.userRealName,jdbcType=VARCHAR},
+      head_url = #{record.headUrl,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=BIGINT},
+      city_id = #{record.cityId,jdbcType=BIGINT},
+      area_id = #{record.areaId,jdbcType=BIGINT},
+      user_sex = #{record.userSex,jdbcType=VARCHAR},
+      user_qq = #{record.userQq,jdbcType=VARCHAR},
+      user_mail = #{record.userMail,jdbcType=VARCHAR},
+      user_wx = #{record.userWx,jdbcType=VARCHAR},
+      expand1 = #{record.expand1,jdbcType=VARCHAR},
+      expand2 = #{record.expand2,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jjc.entity.user.User" >
+    update project_user
+    <set >
+      <if test="userNumber != null" >
+        user_number = #{userNumber,jdbcType=BIGINT},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPayPassword != null" >
+        user_pay_password = #{userPayPassword,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        union_id = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wouldStore != null" >
+        would_store = #{wouldStore,jdbcType=INTEGER},
+      </if>
+      <if test="userLevel != null" >
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="wouldReal != null" >
+        would_real = #{wouldReal,jdbcType=INTEGER},
+      </if>
+      <if test="userRealName != null" >
+        user_real_name = #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null" >
+        head_url = #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userQq != null" >
+        user_qq = #{userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        user_mail = #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userWx != null" >
+        user_wx = #{userWx,jdbcType=VARCHAR},
+      </if>
+      <if test="expand1 != null" >
+        expand1 = #{expand1,jdbcType=VARCHAR},
+      </if>
+      <if test="expand2 != null" >
+        expand2 = #{expand2,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jjc.entity.user.User" >
+    update project_user
+    set user_number = #{userNumber,jdbcType=BIGINT},
+      user_password = #{userPassword,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_pay_password = #{userPayPassword,jdbcType=BIGINT},
+      user_type = #{userType,jdbcType=INTEGER},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      union_id = #{unionId,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      would_store = #{wouldStore,jdbcType=INTEGER},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      would_real = #{wouldReal,jdbcType=INTEGER},
+      user_real_name = #{userRealName,jdbcType=VARCHAR},
+      head_url = #{headUrl,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      city_id = #{cityId,jdbcType=BIGINT},
+      area_id = #{areaId,jdbcType=BIGINT},
+      user_sex = #{userSex,jdbcType=VARCHAR},
+      user_qq = #{userQq,jdbcType=VARCHAR},
+      user_mail = #{userMail,jdbcType=VARCHAR},
+      user_wx = #{userWx,jdbcType=VARCHAR},
+      expand1 = #{expand1,jdbcType=VARCHAR},
+      expand2 = #{expand2,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

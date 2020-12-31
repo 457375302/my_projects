@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jjc.mapper.knowledge.KnowledgeProductMapper" >
+  <resultMap id="BaseResultMap" type="com.jjc.entity.knowledge.KnowledgeProduct" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="group_id" property="groupId" jdbcType="BIGINT" />
+    <result column="sale_status" property="saleStatus" jdbcType="INTEGER" />
+    <result column="product_title" property="productTitle" jdbcType="VARCHAR" />
+    <result column="product_sn" property="productSn" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="max_image" property="maxImage" jdbcType="VARCHAR" />
+    <result column="min_image" property="minImage" jdbcType="VARCHAR" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="would_hot" property="wouldHot" jdbcType="INTEGER" />
+    <result column="would_new" property="wouldNew" jdbcType="INTEGER" />
+    <result column="would_recom_home" property="wouldRecomHome" jdbcType="INTEGER" />
+    <result column="sort_number" property="sortNumber" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="product_iden" property="productIden" jdbcType="VARCHAR" />
+    <result column="good_num" property="goodNum" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="play_num" property="playNum" jdbcType="INTEGER" />
+    <result column="follow_num" property="followNum" jdbcType="INTEGER" />
+    <result column="forward_num" property="forwardNum" jdbcType="INTEGER" />
+    <result column="upload_entry" property="uploadEntry" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="head_url" property="headUrl" jdbcType="VARCHAR" />
+    <result column="video_author" property="videoAuthor" jdbcType="VARCHAR" />
+    <result column="expand1" property="expand1" jdbcType="VARCHAR" />
+    <result column="expand2" property="expand2" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jjc.entity.knowledge.KnowledgeProduct" extends="BaseResultMap" >
+    <result column="product_context" property="productContext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, group_id, sale_status, product_title, product_sn, keywords, max_image, min_image, 
+    video_url, would_hot, would_new, would_recom_home, sort_number, remark, product_iden, 
+    good_num, comment_num, play_num, follow_num, forward_num, upload_entry, user_id, 
+    user_name, head_url, video_author, expand1, expand2, create_by, create_time, update_by, 
+    update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    product_context
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jjc.entity.knowledge.example.KnowledgeProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from project_knowledge_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pageStart!=null and pageStart gt -1" >
+       limit ${pageStart},${pageSize}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jjc.entity.knowledge.example.KnowledgeProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project_knowledge_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pageStart!=null and pageStart gt -1" >
+       limit ${pageStart},${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from project_knowledge_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from project_knowledge_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jjc.entity.knowledge.example.KnowledgeProductExample" >
+    delete from project_knowledge_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jjc.entity.knowledge.KnowledgeProduct" >
+    insert into project_knowledge_product (id, group_id, sale_status, 
+      product_title, product_sn, keywords, 
+      max_image, min_image, video_url, 
+      would_hot, would_new, would_recom_home, 
+      sort_number, remark, product_iden, 
+      good_num, comment_num, play_num, 
+      follow_num, forward_num, upload_entry, 
+      user_id, user_name, head_url, 
+      video_author, expand1, expand2, 
+      create_by, create_time, update_by, 
+      update_time, product_context)
+    values (#{id,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{saleStatus,jdbcType=INTEGER}, 
+      #{productTitle,jdbcType=VARCHAR}, #{productSn,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+      #{maxImage,jdbcType=VARCHAR}, #{minImage,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, 
+      #{wouldHot,jdbcType=INTEGER}, #{wouldNew,jdbcType=INTEGER}, #{wouldRecomHome,jdbcType=INTEGER}, 
+      #{sortNumber,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{productIden,jdbcType=VARCHAR}, 
+      #{goodNum,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{playNum,jdbcType=INTEGER}, 
+      #{followNum,jdbcType=INTEGER}, #{forwardNum,jdbcType=INTEGER}, #{uploadEntry,jdbcType=INTEGER}, 
+      #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{headUrl,jdbcType=VARCHAR}, 
+      #{videoAuthor,jdbcType=VARCHAR}, #{expand1,jdbcType=VARCHAR}, #{expand2,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{productContext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jjc.entity.knowledge.KnowledgeProduct" >
+    insert into project_knowledge_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="saleStatus != null" >
+        sale_status,
+      </if>
+      <if test="productTitle != null" >
+        product_title,
+      </if>
+      <if test="productSn != null" >
+        product_sn,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="maxImage != null" >
+        max_image,
+      </if>
+      <if test="minImage != null" >
+        min_image,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="wouldHot != null" >
+        would_hot,
+      </if>
+      <if test="wouldNew != null" >
+        would_new,
+      </if>
+      <if test="wouldRecomHome != null" >
+        would_recom_home,
+      </if>
+      <if test="sortNumber != null" >
+        sort_number,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="productIden != null" >
+        product_iden,
+      </if>
+      <if test="goodNum != null" >
+        good_num,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="playNum != null" >
+        play_num,
+      </if>
+      <if test="followNum != null" >
+        follow_num,
+      </if>
+      <if test="forwardNum != null" >
+        forward_num,
+      </if>
+      <if test="uploadEntry != null" >
+        upload_entry,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="headUrl != null" >
+        head_url,
+      </if>
+      <if test="videoAuthor != null" >
+        video_author,
+      </if>
+      <if test="expand1 != null" >
+        expand1,
+      </if>
+      <if test="expand2 != null" >
+        expand2,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="productContext != null" >
+        product_context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="saleStatus != null" >
+        #{saleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productTitle != null" >
+        #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null" >
+        #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="maxImage != null" >
+        #{maxImage,jdbcType=VARCHAR},
+      </if>
+      <if test="minImage != null" >
+        #{minImage,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wouldHot != null" >
+        #{wouldHot,jdbcType=INTEGER},
+      </if>
+      <if test="wouldNew != null" >
+        #{wouldNew,jdbcType=INTEGER},
+      </if>
+      <if test="wouldRecomHome != null" >
+        #{wouldRecomHome,jdbcType=INTEGER},
+      </if>
+      <if test="sortNumber != null" >
+        #{sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="productIden != null" >
+        #{productIden,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNum != null" >
+        #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="playNum != null" >
+        #{playNum,jdbcType=INTEGER},
+      </if>
+      <if test="followNum != null" >
+        #{followNum,jdbcType=INTEGER},
+      </if>
+      <if test="forwardNum != null" >
+        #{forwardNum,jdbcType=INTEGER},
+      </if>
+      <if test="uploadEntry != null" >
+        #{uploadEntry,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null" >
+        #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoAuthor != null" >
+        #{videoAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="expand1 != null" >
+        #{expand1,jdbcType=VARCHAR},
+      </if>
+      <if test="expand2 != null" >
+        #{expand2,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productContext != null" >
+        #{productContext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jjc.entity.knowledge.example.KnowledgeProductExample" resultType="java.lang.Integer" >
+    select count(*) from project_knowledge_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project_knowledge_product
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.saleStatus != null" >
+        sale_status = #{record.saleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.productTitle != null" >
+        product_title = #{record.productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSn != null" >
+        product_sn = #{record.productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxImage != null" >
+        max_image = #{record.maxImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minImage != null" >
+        min_image = #{record.minImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoUrl != null" >
+        video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wouldHot != null" >
+        would_hot = #{record.wouldHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.wouldNew != null" >
+        would_new = #{record.wouldNew,jdbcType=INTEGER},
+      </if>
+      <if test="record.wouldRecomHome != null" >
+        would_recom_home = #{record.wouldRecomHome,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortNumber != null" >
+        sort_number = #{record.sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productIden != null" >
+        product_iden = #{record.productIden,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodNum != null" >
+        good_num = #{record.goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNum != null" >
+        comment_num = #{record.commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.playNum != null" >
+        play_num = #{record.playNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.followNum != null" >
+        follow_num = #{record.followNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.forwardNum != null" >
+        forward_num = #{record.forwardNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.uploadEntry != null" >
+        upload_entry = #{record.uploadEntry,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headUrl != null" >
+        head_url = #{record.headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoAuthor != null" >
+        video_author = #{record.videoAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expand1 != null" >
+        expand1 = #{record.expand1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expand2 != null" >
+        expand2 = #{record.expand2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productContext != null" >
+        product_context = #{record.productContext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update project_knowledge_product
+    set id = #{record.id,jdbcType=BIGINT},
+      group_id = #{record.groupId,jdbcType=BIGINT},
+      sale_status = #{record.saleStatus,jdbcType=INTEGER},
+      product_title = #{record.productTitle,jdbcType=VARCHAR},
+      product_sn = #{record.productSn,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      max_image = #{record.maxImage,jdbcType=VARCHAR},
+      min_image = #{record.minImage,jdbcType=VARCHAR},
+      video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      would_hot = #{record.wouldHot,jdbcType=INTEGER},
+      would_new = #{record.wouldNew,jdbcType=INTEGER},
+      would_recom_home = #{record.wouldRecomHome,jdbcType=INTEGER},
+      sort_number = #{record.sortNumber,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      product_iden = #{record.productIden,jdbcType=VARCHAR},
+      good_num = #{record.goodNum,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      play_num = #{record.playNum,jdbcType=INTEGER},
+      follow_num = #{record.followNum,jdbcType=INTEGER},
+      forward_num = #{record.forwardNum,jdbcType=INTEGER},
+      upload_entry = #{record.uploadEntry,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      head_url = #{record.headUrl,jdbcType=VARCHAR},
+      video_author = #{record.videoAuthor,jdbcType=VARCHAR},
+      expand1 = #{record.expand1,jdbcType=VARCHAR},
+      expand2 = #{record.expand2,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      product_context = #{record.productContext,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_knowledge_product
+    set id = #{record.id,jdbcType=BIGINT},
+      group_id = #{record.groupId,jdbcType=BIGINT},
+      sale_status = #{record.saleStatus,jdbcType=INTEGER},
+      product_title = #{record.productTitle,jdbcType=VARCHAR},
+      product_sn = #{record.productSn,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      max_image = #{record.maxImage,jdbcType=VARCHAR},
+      min_image = #{record.minImage,jdbcType=VARCHAR},
+      video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      would_hot = #{record.wouldHot,jdbcType=INTEGER},
+      would_new = #{record.wouldNew,jdbcType=INTEGER},
+      would_recom_home = #{record.wouldRecomHome,jdbcType=INTEGER},
+      sort_number = #{record.sortNumber,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      product_iden = #{record.productIden,jdbcType=VARCHAR},
+      good_num = #{record.goodNum,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      play_num = #{record.playNum,jdbcType=INTEGER},
+      follow_num = #{record.followNum,jdbcType=INTEGER},
+      forward_num = #{record.forwardNum,jdbcType=INTEGER},
+      upload_entry = #{record.uploadEntry,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      head_url = #{record.headUrl,jdbcType=VARCHAR},
+      video_author = #{record.videoAuthor,jdbcType=VARCHAR},
+      expand1 = #{record.expand1,jdbcType=VARCHAR},
+      expand2 = #{record.expand2,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jjc.entity.knowledge.KnowledgeProduct" >
+    update project_knowledge_product
+    <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="saleStatus != null" >
+        sale_status = #{saleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productTitle != null" >
+        product_title = #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null" >
+        product_sn = #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="maxImage != null" >
+        max_image = #{maxImage,jdbcType=VARCHAR},
+      </if>
+      <if test="minImage != null" >
+        min_image = #{minImage,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wouldHot != null" >
+        would_hot = #{wouldHot,jdbcType=INTEGER},
+      </if>
+      <if test="wouldNew != null" >
+        would_new = #{wouldNew,jdbcType=INTEGER},
+      </if>
+      <if test="wouldRecomHome != null" >
+        would_recom_home = #{wouldRecomHome,jdbcType=INTEGER},
+      </if>
+      <if test="sortNumber != null" >
+        sort_number = #{sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="productIden != null" >
+        product_iden = #{productIden,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNum != null" >
+        good_num = #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="playNum != null" >
+        play_num = #{playNum,jdbcType=INTEGER},
+      </if>
+      <if test="followNum != null" >
+        follow_num = #{followNum,jdbcType=INTEGER},
+      </if>
+      <if test="forwardNum != null" >
+        forward_num = #{forwardNum,jdbcType=INTEGER},
+      </if>
+      <if test="uploadEntry != null" >
+        upload_entry = #{uploadEntry,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null" >
+        head_url = #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoAuthor != null" >
+        video_author = #{videoAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="expand1 != null" >
+        expand1 = #{expand1,jdbcType=VARCHAR},
+      </if>
+      <if test="expand2 != null" >
+        expand2 = #{expand2,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productContext != null" >
+        product_context = #{productContext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jjc.entity.knowledge.KnowledgeProduct" >
+    update project_knowledge_product
+    set group_id = #{groupId,jdbcType=BIGINT},
+      sale_status = #{saleStatus,jdbcType=INTEGER},
+      product_title = #{productTitle,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      max_image = #{maxImage,jdbcType=VARCHAR},
+      min_image = #{minImage,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      would_hot = #{wouldHot,jdbcType=INTEGER},
+      would_new = #{wouldNew,jdbcType=INTEGER},
+      would_recom_home = #{wouldRecomHome,jdbcType=INTEGER},
+      sort_number = #{sortNumber,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      product_iden = #{productIden,jdbcType=VARCHAR},
+      good_num = #{goodNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      play_num = #{playNum,jdbcType=INTEGER},
+      follow_num = #{followNum,jdbcType=INTEGER},
+      forward_num = #{forwardNum,jdbcType=INTEGER},
+      upload_entry = #{uploadEntry,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      head_url = #{headUrl,jdbcType=VARCHAR},
+      video_author = #{videoAuthor,jdbcType=VARCHAR},
+      expand1 = #{expand1,jdbcType=VARCHAR},
+      expand2 = #{expand2,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      product_context = #{productContext,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jjc.entity.knowledge.KnowledgeProduct" >
+    update project_knowledge_product
+    set group_id = #{groupId,jdbcType=BIGINT},
+      sale_status = #{saleStatus,jdbcType=INTEGER},
+      product_title = #{productTitle,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      max_image = #{maxImage,jdbcType=VARCHAR},
+      min_image = #{minImage,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      would_hot = #{wouldHot,jdbcType=INTEGER},
+      would_new = #{wouldNew,jdbcType=INTEGER},
+      would_recom_home = #{wouldRecomHome,jdbcType=INTEGER},
+      sort_number = #{sortNumber,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      product_iden = #{productIden,jdbcType=VARCHAR},
+      good_num = #{goodNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      play_num = #{playNum,jdbcType=INTEGER},
+      follow_num = #{followNum,jdbcType=INTEGER},
+      forward_num = #{forwardNum,jdbcType=INTEGER},
+      upload_entry = #{uploadEntry,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      head_url = #{headUrl,jdbcType=VARCHAR},
+      video_author = #{videoAuthor,jdbcType=VARCHAR},
+      expand1 = #{expand1,jdbcType=VARCHAR},
+      expand2 = #{expand2,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
